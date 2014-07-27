@@ -25,6 +25,8 @@
         </div>
             {{HTML::linkRoute('logout', 'Logout', array(), 
                 array('class'=>'wybutton'))}}
+            {{HTML::linkRoute('ask','Postavi pitanje!', array(),
+                array('class'=>'wybutton'))}}
     </div>
 </div>
 @endif

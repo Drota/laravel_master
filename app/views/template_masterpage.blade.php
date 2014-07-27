@@ -1,13 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7">
-<![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8">
-<![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9">
-<![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js">
-<!--<![endif]-->
-
 <head>
     <meta charset="utf-8" />
     <title>{{isset($title)?$title.' | ':''}} LARAVEL Q & A</title>
@@ -43,5 +34,22 @@
     {{HTML::script('js/plugins.js')}}
     {{HTML::script('js/script.js')}}
     @yield('footer_assets')
+    @if(Sentry::check() && (Route::currentRouteName() ==
+    'index' || Route::currentRouteName() == 'tagged' || 
+    Route::currentRouteName() == 'question_details'))
+    <script type="text/javascript">
+        $('.questions .arrowbox .like, .questions . arrowbox\n\
+        .dislike').click(function(e){
+        e.preventDefault();
+        var $this = $(this);
+        $.get($(this).attr('href'),function($data){
+            $this.parent('.arrowbox').next('.cntbox').find
+            ('.cntcount').text($data);
+        }).fail(function(){
+            alert('Pojavila se greska, pokusajte ponovo');
+            });
+        });
+    </script>
+    @endif
 </body>
 </html>
