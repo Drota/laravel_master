@@ -5,10 +5,10 @@
 <h1 id="replyh">{{$question->title}}</h1>
 <div class="qwrap questions">
     <div id="rcount">Pogledano {{$question->viewed}}
-    time{{$question->viewed>0?'s':''}}.</div>
+    puta {{$question->viewed>0?'':''}}.</div>
     @if(Sentry::check())
     <div class="arrowbox">
-        {{HTML::linkRoute('vote',''array('up',$question->id)
+        {{HTML::linkRoute('vote', array('up',$question->id)
             ,array('class'=>'like', 'title'=>'Upvote'))}}
         {{HTML::linkRoute('vote','',array('down',
             $question->id),array('class'=>'dislike','title'=>
@@ -27,11 +27,12 @@
     <div class="cnttext">vote</div>
     </div>
     <div class="rblock">
-        <p>{{n12br($question->question)}}</p>
+        <div class="rbox">
+        <p>{{nl2br($question->question)}}</p>
     </div>
          <div class="qinfo">Pitanje od <a href="#">
         {{$question->users->first_name.' '.$question->
-        users->last_name}}</a> oko {{date('d/m/Y \n\
+        users->last_name}}</a> oko {{date('d/m/Y \|\
         H:i:s' ,strtotime($question->created_at))}}</div>
     @if($question->tags!=null)
     <ul class="gtagul">
@@ -57,7 +58,7 @@
     </div>
     @endif
     </div>
-    <div id="rreplycount">{{count($question->answers)}}odgovori</div>
+    <div id="rreplycount">{{count($question->answers)}} odgovora</div>
     
     {{--ako je korisnik ulogovan imacemo blok za odgovore--}}
     @if(Sentry::check())
@@ -72,6 +73,9 @@
         {{Form::close()}}
     </div>
     @endif
+    </div>
+    @stop
+  
     @if(count($question->answers))
         @foreach($question->answers as $answer)
             @if ($answer->correct==1)
@@ -83,7 +87,7 @@
         <div class="arrowbox">
             {{HTML::linkRoute('vote_answer','',
                 array('up', $answer->id), array('class'=>
-                'like', 'title'=>Upvote))}}
+                'like', 'title'=>'Upvote'))}}
             {{HTML::linkRoute('vote_answer','',
                 array('down', $answer->id), array('class'=>
                 'dislike', 'title'=>'Downvote'))}}
@@ -93,7 +97,7 @@
             <div class="cntcount">{{$answer->votes}}</div>
             <div class="cntext">Glasanje</div>
         </div>
-    @if(@answer->correct==1)
+    @if($answer->correct==1)
     <div class="bestanswer">Najbolji odgovor</div>
     @else
         {{--ako je ulogovan admin ili vlasnik pitanja, pokazi
@@ -103,7 +107,7 @@
                 Sentry::getUser()->id == $question->userID)
                 <a class="chooseme" href="{{URL::route
                     ('choose_answer', $answer->id)}}">
-                    <div class="choosebestanswer">choose</div></a>
+                    <div class="choosebestanswer">izaberi</div></a>
             @endif
         @endif
     @endif
@@ -114,15 +118,15 @@
         <div class="rrepolinf">
             <p>Odgovor od <a href="#">{{$answer->
                 users->first_name.' '.$answer->users->
-                last_name}}</a> oko {{datum('d/m/Y/ H:i:s',
+                last_name}}</a> oko {{date('d/m/Y/ H:i:s',
                 strtotime($answer->created_at))}}</p>
-            
+  
             {{--odgovor mogu obrisati samo admini i vlasnik o.--}}
             @if(Sentry::check())
             <div class="qwrap">
                 <ul class="fastbar">
                     @if(Sentry::getUser()->hasAccess('admin')||
-                    Sentry::getUser()->id == @answer->userID)
+                    Sentry::getUser()->id == $answer->userID)
                     <li class="close">{{HTML::linkRoute(
                     'delete_answer', 'delete', $answer->id)}}</li>
                     @endif
@@ -134,7 +138,7 @@
     </div>
     @endforeach
     @endif
-            </div>
+    </div>
             
     </div>
     @stop
@@ -168,6 +172,7 @@
         </script>
         @endif
     @endif
+    @stop
     
     {{--za admine i vlasnike pitanja--}}
     @if(Sentry::check())
@@ -182,7 +187,5 @@
         @endif
     @endif
             
-</div>
-@stop
-            
+   
         

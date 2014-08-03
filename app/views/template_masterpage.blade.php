@@ -9,7 +9,7 @@
     <div class="centerfix" id="header">
         <div class="centercontent">
             <a href="{{URL::route('index')}}">
-                {{HTML::image('img/header/logo.png')}}
+                {{HTML::image('img/logo.png')}}
             </a>
         </div>
     </div>
@@ -31,7 +31,7 @@
         </div>   
     </div>
     {{HTML::script('js/libs.js')}}
-    {{HTML::script('js/plugins.js')}}
+    {{HTML::script('http://code.jquery.com/jquery-2.1.1.min.js')}}
     {{HTML::script('js/script.js')}}
     @yield('footer_assets')
     @if(Sentry::check() && (Route::currentRouteName() ==

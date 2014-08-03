@@ -10,8 +10,7 @@ class Question extends Eloquent {
     }
     
     public function tags() {
-        return $this->belongsToMany('Tag', 'question_tags');
-                           
+        return $this->belongsToMany('Tag', 'question_tags');                      
     }
     
     public function answers() {

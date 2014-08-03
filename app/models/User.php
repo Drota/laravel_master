@@ -7,21 +7,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 
 class User extends Cartalyst\Sentry\Users\Eloquent\User {
 
-	use UserTrait, RemindableTrait;
-
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
-
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = array('password', 'remember_token');
+    
         
     public static $signup_rules = array(
         'first_name'=>'required|min:3',
@@ -32,8 +18,8 @@ class User extends Cartalyst\Sentry\Users\Eloquent\User {
     );
     
     public static $login_rules = array(
-        'email'=>'required|email|exists:user,email',
-        'password'=>'required|min:6'
+        'email'=>'required|email|exists:users,email',
+        'password'=>'required|min:5'
     );
     
     public function questions() {

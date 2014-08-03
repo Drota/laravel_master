@@ -7,7 +7,7 @@ class OdgovoriController extends \BaseController {
         if($question) {
             
             $validation = Validator::make(Input::all(),
-                Odgovor::$add_rules);
+                Answer::$add_rules);
             
             if($validation->passes()) {
                 Answer::create(array(

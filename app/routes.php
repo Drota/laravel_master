@@ -32,7 +32,7 @@ Route::get('/', function()
     return View::make('hello');
 });
 */
- 
+
 Route::get('signup', array('as'=>'signup_form', 'before'=>'is_quest', 'uses'=>'AuthController@getSignup'));
 Route::post('signup', array('as'=>'signup_form_post', 'before'=>'csrf|is_guest', 'uses'=>'AuthController@postSignup'));
 Route::post('login', array('as'=>'login_post', 'before'=>'csrf|is_guest', 'uses'=>'AuthController@postLogin'));
@@ -40,7 +40,7 @@ Route::get('logout', array('as'=>'logout', 'before'=>'user', 'uses'=>'AuthContro
 
 Route::get('/', array('as'=>'index', 'uses'=>'MainController@getIndex'));
 
-Route::get('ask', array('as'=>'ask', 'before'=>'user', 'uses'=>'PitanjaController@postNew'));
+Route::get('ask', array('as'=>'ask', 'before'=>'user', 'uses'=>'PitanjaController@getNew'));
 Route::post('ask', array('as'=>'ask_post', 'before'=>'user|csrf', 'uses'=>'PitanjaController@postNew'));
 
 Route::get('question/{id}/{title}', array(

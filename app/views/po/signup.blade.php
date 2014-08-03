@@ -1,7 +1,7 @@
 @extends('template_masterpage')
 
 @section('content')
-    <h1 id="replyh">Uloguj se</h1>
+    <h1 id="replyh">Registruj se</h1>
     <p class="bluey">Molim vas, popunite ispravno polja da bi ste
 se uspesno registrovali</p>
 
@@ -21,8 +21,7 @@ se uspesno registrovali</p>
     <p class="minihead">provera lozinke</p>
 {{Form::password('re_password','',
     array('class'=>'fullinput'))}}
-    <p class="minihead">Your personal info will not be 
-    shared with any 3rd party companies</p>
+    <p> </p>
 {{Form::submit('Registruj se')}}
 {{Form::close()}}
 @stop

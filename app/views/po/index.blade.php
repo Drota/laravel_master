@@ -5,7 +5,7 @@
     @if(count($questions))
         @foreach($questions as $question)
         <?php
-            $ascer = $question->users;
+            $asker = $question->users;
             $tags = $question->tags;
         ?>
         <div class="qwrap questions">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             @endforeach
-            {{$question->links()}}
+            {{$questions->links()}}
         @else
         Nema pronadjenih pitanja {{HTML::linkRoute('ask',
             'Postavi pitanje?')}}

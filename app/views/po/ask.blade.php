@@ -16,7 +16,8 @@ da se odgovor oznaci kao "tacan/ispravan"</p>
  (tag1, tag2 ...). Da biste spojili dve reci u tagu koristite - izmedju
  reci (tag-ime, tag-ime-2...):</p>
 {{Form::text('tags',Input::old('tags'), array('class'=>
-            'fillimput'))}}
+            'fillinput'))}}
+<p></p>
 {{Form::submit('Postavi to pitanje')}}
 {{Form::close()}}
 @stop

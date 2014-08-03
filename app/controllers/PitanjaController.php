@@ -22,7 +22,7 @@ class PitanjaController extends \BaseController {
             
             if(Str::length(Input::get('tags'))) {
                 $tags_array = explode(',', Input::get('tags'));
-                if(count($taggs_array)) {
+                if(count($tags_array)) {
                     foreach ($tags_array as $tag) {
                         $tag = trim($tag);
                         if(Str::length(Str::slug($tag))) {
@@ -35,7 +35,7 @@ class PitanjaController extends \BaseController {
                                     'tagFriendly'=>$tag_friendly
                                 ));
                             }else{
-                                $tag_info = $tag_check-first();
+                                $tag_info = $tag_check->first();
                             }
                         }
                         $question->tags()->attach($tag_info->id);
@@ -81,7 +81,7 @@ class PitanjaController extends \BaseController {
             $question->update(array(
                 'viewed'=>$question->viewed+1));
             
-            return View::make('pa.details')
+            return View::make('po.details')
                     ->with('title', $question->title)
                     ->with('question' ,$question);
         }else{
@@ -108,11 +108,11 @@ class PitanjaController extends \BaseController {
         if($tag) {
             return View::make('po.index')
             ->with('title', 'Pitanja tagovana sa: '.$tag->tag)
-            ->with('questions', $tag->questions()-> 
-              with('users', 'tags', 'answers')->paginate(2));
+            ->with('questions', $tag->questions() 
+            ->with('users', 'tags', 'answers')->paginate(2));
         }else{
             return Redirect::route('index')
-            ->with('error', 'Tag nije nadjen');
+            ->with('error', 'Tag nije pronadjen');
         }
     }
 

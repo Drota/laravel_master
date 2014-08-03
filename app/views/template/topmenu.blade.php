@@ -9,23 +9,25 @@
     <div class="centercontent">
         {{Form::open(array('route'=>'login_post'))}}
         {{Form::email('email', Input::old('email'), 
-                    array('placeholder'=>'Password'))}}
-        {{Form::submit('Log in!')}}
+                    array('placeholder'=>'E-mail adresa'))}}
+        {{Form::password('password', 
+                    array('placeholder'=>'lozinka'))}}
+        {{Form::submit('Uloguj se!')}}
         {{Form::close()}}
-        {{HTML::link('signup_form', 'Register', array(), 
+        {{HTML::linkRoute('signup_form', 'Registruj se', array(), 
             array('class'=>'wybutton'))}}
     </div>
 </div>
 @else
 <div class="centerfix" id="login">
     <div class="centercontent">
-        <div id="userblock">Hello again,
+        <div id="userblock">Zdravo,
             {{HTML::link('#',Sentry::getUser()->first_name. '
                         ' .Sentry::getUser()->last_name)}}
         </div>
-            {{HTML::linkRoute('logout', 'Logout', array(), 
+            {{HTML::linkRoute('logout', 'Izloguj se', array(), 
                 array('class'=>'wybutton'))}}
-            {{HTML::linkRoute('ask','Postavi pitanje!', array(),
+            {{HTML::linkRoute('ask', 'Postavi pitanje!', array(),
                 array('class'=>'wybutton'))}}
     </div>
 </div>
